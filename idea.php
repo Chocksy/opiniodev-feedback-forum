@@ -1,4 +1,11 @@
 <?
+
+if(Session::check()) {
+    $videas_q=$db->db_query("SELECT idea_id FROM feedback_votes WHERE voter_id='".Session::get_param('user_id')."'");
+    while($i_videas=mysql_fetch_assoc($videas_q))
+        $voted_ideas[]=$i_videas;
+}
+
 $id=$_GET['idea_id'];
 $idea=mysql_fetch_array($db->db_query("SELECT * FROM feedback_ideas WHERE id='$id'"));
 $title=$_GET['title'];
@@ -33,18 +40,17 @@ while ($info = mysql_fetch_array($result_resources)) {
 ?>
 <div class="idea_container">
     <div class="votes">
-        <div id="nr_votes_<?=$idea['id']?>" class="nr_votes <?=($idea['status']==4) ? 'full' : ''?>">
+        <div id="nr_votes_<?=$idea['id']?>" class="nr_votes <?=($idea['status']==4 || checkVoted($idea['id'],$voted_ideas)) ? 'full' : ''?>">
             <?=dynamicFont(number_format($idea['votes'],0,'',','),32)?><br/>
             votes<br/>
         </div>
-        <? if($idea['status']!=4) { ?>
+        <? if($idea['status']!=4 && !checkVoted($idea['id'],$voted_ideas)) { ?>
         <a href="javascript:void(0)" id="do_vote_<?=$idea['id']?>" onclick="vote('<?=$idea['id']?>')" class="do_vote">vote</a>
             <? } ?>
         <? if($idea['status']!=0) { ?>
         <div class="nr_votes <?=giveStatus($idea['status'],'class')?>"><?=giveStatus($idea['status'],'text')?></div>
-            <? } ?><br/>
+            <? } ?>
     </div>
-
     <div class="idea">
         <div class="title nomrg"><b><?=$idea['idea']?></b></div>
         <div class="auth_desc">

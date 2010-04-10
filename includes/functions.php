@@ -87,4 +87,23 @@ function shortString($string,$length,$replacer=' ...') {
 function secure_string($string) {
     return filter_var($string, FILTER_SANITIZE_SPECIAL_CHARS);
 }
+
+function array_search_r($needle, $haystack) {
+    foreach($haystack as $value) {
+        if(is_array($value))
+            $match=array_search_r($needle, $value);
+        if($value==$needle)
+            $match=1;
+        if($match)
+            return 1;
+    }
+    return 0;
+} 
+
+function checkVoted($idea_id,$voted_ideas) {
+    if(array_search_r($idea_id,$voted_ideas))
+        return true;
+    else
+        return false;
+}
 ?>

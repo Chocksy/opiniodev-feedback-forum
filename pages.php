@@ -32,7 +32,11 @@ switch($tab) {
 $new_rez=mysql_num_rows($db->db_query("SELECT id FROM feedback_ideas WHERE date(sub_date)='".$curdate."' AND status IN('0','1','2','3')"));
 $acc_rez=mysql_num_rows($db->db_query("SELECT id FROM feedback_ideas WHERE status IN('1','2','3')"));
 $com_rez=mysql_num_rows($db->db_query("SELECT id FROM feedback_ideas WHERE status=4"));
-
+if(Session::check()) {
+    $videas_q=$db->db_query("SELECT idea_id FROM feedback_votes WHERE voter_id='".Session::get_param('user_id')."'");
+    while($i_videas=mysql_fetch_assoc($videas_q))
+        $voted_ideas[]=$i_videas;
+}
 //SEARCH TIME
 $p = new Paginator();
 $p->setSQL("SELECT * FROM feedback_ideas WHERE ".$selu."".$order);
@@ -92,11 +96,11 @@ while ($info = mysql_fetch_array($result_resources)) {
         foreach($ideas as $idea) { ?>
     <div class="idea_container">
         <div class="votes">
-            <div id="nr_votes_<?=$idea['id']?>" class="nr_votes <?=($idea['status']==4) ? 'full' : ''?>">
+            <div id="nr_votes_<?=$idea['id']?>" class="nr_votes <?=($idea['status']==4 || checkVoted($idea['id'],$voted_ideas)) ? 'full' : ''?>">
                         <?=dynamicFont(number_format($idea['votes'],0,'',','),32)?><br/>
                 votes<br/>
             </div>
-                    <? if($idea['status']!=4) { ?>
+                    <? if($idea['status']!=4 && !checkVoted($idea['id'],$voted_ideas)) { ?>
             <a href="javascript:void(0)" id="do_vote_<?=$idea['id']?>" onclick="vote('<?=$idea['id']?>')" class="do_vote">vote</a>
                         <? } ?>
                     <? if($idea['status']!=0) { ?>
