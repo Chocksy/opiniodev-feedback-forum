@@ -32,6 +32,9 @@ switch($tab) {
 $new_rez=mysql_num_rows($db->db_query("SELECT id FROM feedback_ideas WHERE date(sub_date)='".$curdate."' AND status IN('0','1','2','3')"));
 $acc_rez=mysql_num_rows($db->db_query("SELECT id FROM feedback_ideas WHERE status IN('1','2','3')"));
 $com_rez=mysql_num_rows($db->db_query("SELECT id FROM feedback_ideas WHERE status=4"));
+
+$voted_ideas=array();
+
 if(Session::check()) {
     $videas_q=$db->db_query("SELECT idea_id FROM feedback_votes WHERE voter_id='".Session::get_param('user_id')."'");
     while($i_videas=mysql_fetch_assoc($videas_q))

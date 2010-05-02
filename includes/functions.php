@@ -101,7 +101,7 @@ function array_search_r($needle, $haystack) {
 } 
 
 function checkVoted($idea_id,$voted_ideas) {
-    if(array_search_r($idea_id,$voted_ideas))
+    if(array_search_r($idea_id,$voted_ideas) || !Session::check())
         return true;
     else
         return false;

@@ -1,5 +1,5 @@
 <?
-
+$voted_ideas=array();
 if(Session::check()) {
     $videas_q=$db->db_query("SELECT idea_id FROM feedback_votes WHERE voter_id='".Session::get_param('user_id')."'");
     while($i_videas=mysql_fetch_assoc($videas_q))
