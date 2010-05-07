@@ -7,10 +7,11 @@ if ($_SERVER['SERVER_ADDR'] == '127.0.0.1') {
     define('DB_PASSWORD', '');
 } else {
 // online config
-    define('DB_HOST', 'localhost');
-    define('DB_NAME', 'ajaxmast_hack');
-    define('DB_USERNAME', 'ajaxmast');
-    define('DB_PASSWORD', 'LrN&Fd7u,Qkv');
+        define('DB_HOST', 'localhost');
+    define('DB_NAME', 'hack');
+    define('DB_USERNAME', 'root');
+    define('DB_PASSWORD', '');
+
 }
 
 ini_set('session.use_cookies', 1);
