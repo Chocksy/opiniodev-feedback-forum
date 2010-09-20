@@ -12,7 +12,7 @@ if ($_SERVER['SERVER_ADDR'] == '127.0.0.1') {
     define('DB_USERNAME', '');
     define('DB_PASSWORD', '');
 }
-
+//comment
 ini_set('session.use_cookies', 1);
 ini_set('session.use_only_cookies', 1);
 class config {
