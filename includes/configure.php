@@ -8,9 +8,9 @@ if ($_SERVER['SERVER_ADDR'] == '127.0.0.1') {
 } else {
 // online config
     define('DB_HOST', 'localhost');
-    define('DB_NAME', 'ajaxmast_feedbackforum');
-    define('DB_USERNAME', 'ajaxmast');
-    define('DB_PASSWORD', 'LrN&Fd7u,Qkv');
+    define('DB_NAME', '');
+    define('DB_USERNAME', '');
+    define('DB_PASSWORD', '');
 }
 
 ini_set('session.use_cookies', 1);
