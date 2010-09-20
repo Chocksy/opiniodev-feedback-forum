@@ -7,11 +7,10 @@ if ($_SERVER['SERVER_ADDR'] == '127.0.0.1') {
     define('DB_PASSWORD', '');
 } else {
 // online config
-        define('DB_HOST', 'localhost');
-    define('DB_NAME', 'hack');
-    define('DB_USERNAME', 'root');
-    define('DB_PASSWORD', '');
-
+    define('DB_HOST', 'localhost');
+    define('DB_NAME', 'ajaxmast_feedbackforum');
+    define('DB_USERNAME', 'ajaxmast');
+    define('DB_PASSWORD', 'LrN&Fd7u,Qkv');
 }
 
 ini_set('session.use_cookies', 1);
@@ -34,7 +33,7 @@ class config {
 
     //location data{
     var $local_base='http://localhost/feedbacker/';
-    var $online_base='http://ajaxmasters.com/development/hackme/feedback/';
+    var $online_base='http://ajaxmasters.com/development/feedback-forum/';
 
     var $HTTP_SERVER_BASE='';
     var $HTTP_SERVER_BASE_JAVA='';

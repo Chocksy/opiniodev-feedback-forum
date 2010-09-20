@@ -93,7 +93,7 @@ class session
  
 	private static function _regenerate_id()
 	{
-		session_regenerate_id();
+		//session_regenerate_id();
 	}
 }
 ?>

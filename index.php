@@ -49,7 +49,7 @@
             </div>
             <div id="footer">
                 &copy;
-                <?=date('Y')?> WarOfCoders.com
+                <?=date('Y')?> <a href="http://ajaxmasters.com">ajaxmasters.com</a>
             </div>
         </div>
         <!--scripts place yeeee-->
