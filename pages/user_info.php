@@ -1,9 +1,11 @@
 <?php
 $qmy_ideas=$db->db_query("SELECT id,idea,votes FROM feedback_ideas WHERE auth_id='".$session->get_param('user_id')."' ORDER BY sub_date DESC LIMIT 4");
+$my_ideas = array();
 while($idea=mysql_fetch_array($qmy_ideas))
     $my_ideas[]=$idea;
 
 $qmy_votes=$db->db_query("SELECT * FROM feedback_votes WHERE voter_id='".$session->get_param('user_id')."' ORDER BY id DESC LIMIT 4");
+$my_votes = array();
 while($vote=mysql_fetch_array($qmy_votes)){
     $idea=mysql_fetch_array($db->db_query("SELECT id,idea,votes FROM feedback_ideas WHERE id='".$vote['idea_id']."'"));
     $my_votes[]=$idea;

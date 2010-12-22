@@ -1,10 +1,13 @@
 <?php
-$tab=$_GET['tab'];
-if(!isset($tab))
+if(!isset($_GET['tab']))
     $tab='popular';
-$page=$_GET['page'];
-if(!isset($page))
+else
+    $tab=$_GET['tab'];
+
+if(!isset($_GET['page']))
     $page=1;
+else
+    $page=$_GET['page'];
 
 $curdate=date('Y-m-d');
 switch($tab) {

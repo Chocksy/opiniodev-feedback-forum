@@ -12,9 +12,10 @@ $title=$_GET['title'];
 
 $idea_link='idea/'.$id.'-'.$title;
 
-$page=$_GET['page'];
-if(!isset($page))
+if(!isset($_GET['page']))
     $page=1;
+else
+    $page=$_GET['page'];
 
 $order=' ORDER BY date DESC';
 $selu="idea_id='$id'";
@@ -32,6 +33,7 @@ if($total_pages>$page)
     $next_page=$page+1;
 
 $result_resources = $p->getPageNumber($page);
+$comments = array();
 while ($info = mysql_fetch_array($result_resources)) {
     $user=mysql_fetch_assoc($db->db_query("SELECT ".$conf->USERNAME.",".$conf->USR_ID." FROM ".$conf->USERS_TABLE." WHERE ".$conf->USR_ID."='".$info['user_id']."'"));
     $comments[]=array('com_data'=>$info,

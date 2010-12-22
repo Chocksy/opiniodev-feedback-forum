@@ -34,9 +34,10 @@ class session
 	static function check()
 	{
 		if (config::session_timeout == 0)
-		{
+        {
 			return (isset($_SESSION['ss_fprint'])
-			&& $_SESSION['ss_fprint'] == self::_Fingerprint() && ($_SERVER['HTTP_REFFERER'] != '' ? (strpos($_SERVER['HTTP_REFERER'], $_SERVER['HTTP_HOST']) !== false ? true : false) : true));
+                && $_SESSION['ss_fprint'] == self::_Fingerprint() && !empty($_SERVER['HTTP_REFERER'])
+                && ($_SERVER['HTTP_REFERER'] != '' ? (strpos($_SERVER['HTTP_REFERER'], $_SERVER['HTTP_HOST']) !== false ? true : false) : true));
 		}
 		else
 		{
@@ -45,7 +46,8 @@ class session
 			{
 				self::add_param('timeout', intval(strtotime($date)) + (60*intval(config::session_timeout)));
 				return (isset($_SESSION['ss_fprint'])
-				&& $_SESSION['ss_fprint'] == self::_Fingerprint() && ($_SERVER['HTTP_REFFERER'] != '' ? (strpos($_SERVER['HTTP_REFERER'], $_SERVER['HTTP_HOST']) !== false ? true : false) : true));
+                    && $_SESSION['ss_fprint'] == self::_Fingerprint() && isset($_SERVER['HTTP_REFERER']) 
+                    && ($_SERVER['HTTP_REFERER'] != '' ? (strpos($_SERVER['HTTP_REFERER'], $_SERVER['HTTP_HOST']) !== false ? true : false) : true));
 			}
 			else
 			{
