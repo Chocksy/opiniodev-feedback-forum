@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL&~E_NOTICE);
 $basedir = $_SERVER['DOCUMENT_ROOT'];
 $file = realpath( $basedir . $_SERVER["REQUEST_URI"] );
 
