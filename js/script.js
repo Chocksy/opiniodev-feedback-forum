@@ -138,7 +138,7 @@ function postComment(id){
 
     if(valid){
         var url=HTTP_SERVER_BASE+'ajax/post_comment.php';
-        var pars='&comment='+$('#comment').val();
+        var pars=$('#post_comment').serialize();
         pars+='&idea_id='+id;
         $.get(url,pars,Response);
     }
@@ -258,6 +258,18 @@ function deleteIdea(id){
     }
     return false;
 }
+
+function deleteComment(id){
+    var url=HTTP_SERVER_BASE+'ajax/delete_comment.php';
+    var pars='&id='+id;
+    $.get(url,pars,Response);
+    function Response(data){
+        document.location.reload(true);
+    }
+    return false;
+}
+
+
 
 $(document).ready(function(){
     jQuery.fn.prettyDate = function(){

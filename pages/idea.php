@@ -116,7 +116,7 @@ while ($info = mysql_fetch_array($result_resources)) {
     <br clear="all"/>
     <? if (is_array($comments))
         foreach ($comments as $comment) { ?>
-            <div class="comment">
+            <div class="comment" id="comm_<?= $comment['id'] ?>">
                 <div class="com_avatar">
                     <img src="http://www.gravatar.com/avatar/<?= md5($comment['user']['email']) ?>?s=50"/>
                 </div>
@@ -126,6 +126,9 @@ while ($info = mysql_fetch_array($result_resources)) {
                         <?= $comment['com_data']['comment'] ?>
                     </div>
                     <div class="com_date" title="<?= date('Y-m-d\TH:i:s\Z', strtotime($comment['com_data']['date'])); ?>"></div>
+                    <? if (Session::get_param('admin')) { ?>
+                        <a href="javascript:void(0)" class="delete_com" onclick="deleteComment('<?= $comment['com_data']['id'] ?>')">Sterge</a>
+                    <? } ?>
                 </div>
                 <br clear="all"/>
             </div>
@@ -166,10 +169,13 @@ while ($info = mysql_fetch_array($result_resources)) {
         <!--Post comment-->
         <div class="comentit">
             <div class="sayit">Spune ceva:</div>
-            <form action="javascript:void(0)" onsubmit="postComment(<?= $id ?>)">
+            <form action="javascript:void(0)" id="post_comment" onsubmit="postComment(<?= $id ?>)">
                 <label for="comment">Comenteaza...</label>
-                <textarea id="comment" rows="5" cols="5"></textarea>
+                <textarea id="comment" name="comment" rows="5" cols="5"></textarea>
                 <input type="submit" class="medium button red" value="Spune-o"/>
+                <? if (Session::get_param('admin')) { ?>
+                    <label><input type="checkbox" value="1" id="admin_change" name="admin_change"/> Schimba commentul dat de catre administrator.</label>
+                    <? } ?>
             </form>
         </div>
     <? } ?>

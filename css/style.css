@@ -178,6 +178,7 @@ label{position: absolute; z-index: 1;-webkit-transition: opacity 0.15s linear; c
 .comment .com_auth a{font-size:14px; font-weight: bold;}
 .comment .com_text{margin-top:5px;}
 .comment .com_date{float:right; margin: 5px 0px; font-weight: bold;}
+.comment .delete_com{color:red; float: right; position: absolute; margin: 7px;}
 
 /* Comment Form
 ----------------------------------------------------------------------------------------------------*/
