@@ -208,7 +208,7 @@ function login(){
     function Response(data){
         var rec=data.toQueryParams();
         if(parseInt(rec['error'])){
-            console.log(rec['msg']);
+            alert(rec['msg']);
         }else{
             document.location.href=HTTP_SERVER_BASE;
         }
@@ -251,8 +251,10 @@ function deleteIdea(id){
     var pars='&id='+id;
     $.get(url,pars,Response);
     function Response(data){
-        document.location.href=HTTP_SERVER_BASE;
-        
+        if($('.search').length>0)
+            document.location.reload(true);
+        else
+            document.location.href=HTTP_SERVER_BASE;
     }
     return false;
 }

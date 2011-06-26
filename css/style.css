@@ -172,7 +172,7 @@ label{position: absolute; z-index: 1;-webkit-transition: opacity 0.15s linear; c
 
 /* Comment
 ----------------------------------------------------------------------------------------------------*/
-.comment{border-bottom: 1px solid #ccc; padding-bottom: 3px;}
+.comment{border-bottom: 1px solid #ccc; padding: 7px 0 3px 0;}
 .comment .com_avatar{float:left; height: auto; width: 60px;}
 .comment .com_content{margin-left: 60px;}
 .comment .com_auth a{font-size:14px; font-weight: bold;}

@@ -35,7 +35,7 @@ switch ($action) {
             $session->add_param("username", $username);
         } else {
             $error = '1';
-            $msg = 'This user does not exist!';
+            $msg = 'Acest user nu exista!';
         }
 
         echo '&error=' . $error . '&msg=' . $msg;
