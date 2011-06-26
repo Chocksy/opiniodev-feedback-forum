@@ -11,8 +11,8 @@ class Conn {
     var $mysql_username2 = DB_USERNAME2;
     var $mysql_password2 = DB_PASSWORD2;
     var $mysql_host2 = DB_HOST2;
-    var $ftables = array('feedback_ideas', 'feedback_votes', 'members');
-    var $stables = array('feedback_comments');
+    var $ftables = array('feedback_ideas', 'feedback_comments', 'members');
+    var $stables = array('feedback_votes');
 
     public function __construct() {
         $this->conn = mysql_connect($this->mysql_host, $this->mysql_username, $this->mysql_password);
@@ -36,11 +36,10 @@ class Conn {
             mysql_select_db("$this->mysql_database2");
         }
     }
-
     /*
-      public function __destruct() {
-      mysql_close($this->conn);
-      } */
+    public function __destruct() {
+        mysql_close($this->conn);
+    }*/
 
     public function db_query($query) {
         $this->detectDB($query);

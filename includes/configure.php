@@ -8,7 +8,7 @@ if ($_SERVER['SERVER_ADDR'] == '127.0.0.1') {
     define('DB_PASSWORD', '');
 
     define('DB_HOST2', 'localhost');
-    define('DB_NAME2', 'feedbacker2');
+    define('DB_NAME2', 'feedbacker');
     define('DB_USERNAME2', 'root');
     define('DB_PASSWORD2', '');
 } else {
@@ -17,6 +17,7 @@ if ($_SERVER['SERVER_ADDR'] == '127.0.0.1') {
     define('DB_NAME', '');
     define('DB_USERNAME', '');
     define('DB_PASSWORD', '');
+  
 
     define('DB_HOST2', 'localhost');
     define('DB_NAME2', '');
