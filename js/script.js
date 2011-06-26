@@ -131,7 +131,7 @@ function createIdea(){
     return false;
 }
 
-function postComment(id){
+function postComment(){
     var valid=true;
     if(!check($('#comment'),'blank','Can\'t be blank!'))
         valid=false;
@@ -139,7 +139,6 @@ function postComment(id){
     if(valid){
         var url=HTTP_SERVER_BASE+'ajax/post_comment.php';
         var pars=$('#post_comment').serialize();
-        pars+='&idea_id='+id;
         $.get(url,pars,Response);
     }
     function Response(data){

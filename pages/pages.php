@@ -10,6 +10,7 @@ else
     $page=$_GET['page'];
 
 $curdate = date('Y-m-d');
+$weekold = date('Y-m-d', strtotime('-1 week'));
 switch ($tab) {
     case'popular':
         $order = ' ORDER BY votes DESC';
@@ -29,7 +30,7 @@ switch ($tab) {
         break;
     case'hot':
         $order = ' ORDER BY votes DESC';
-        $selu = "date(sub_date)='" . $curdate . "' AND status IN('0','1','2','3')";
+        $selu = "(date(sub_date)<='" . $curdate . "' AND date(sub_date)>'" . $weekold . "') AND status IN('0','1','2','3')";
         break;
 }
 $new_rez = mysql_num_rows($db->db_query("SELECT id FROM feedback_ideas WHERE date(sub_date)='" . $curdate . "' AND status IN('0','1','2','3')"));
@@ -101,7 +102,7 @@ while ($info = mysql_fetch_array($result_resources)) {
     if (!empty($ideas)) {
         foreach ($ideas as $idea) {
             ?>
-            <div id="idea_<?=$idea['id']?>" class="idea_container">
+            <div id="idea_<?= $idea['id'] ?>" class="idea_container">
                 <div class="votes">
                     <div id="nr_votes_<?= $idea['id'] ?>" class="nr_votes <?= ($idea['status'] == 4 || $func->checkVoted($idea['id'], $voted_ideas)) ? 'full' : '' ?>">
                         <?= $func->dynamicFont(number_format($idea['votes'], 0, '', ','), 32) ?><br/>
@@ -111,7 +112,7 @@ while ($info = mysql_fetch_array($result_resources)) {
                         <a href="javascript:void(0)" id="do_vote_<?= $idea['id'] ?>" onclick="vote('<?= $idea['id'] ?>')" class="do_vote">voteaza</a>
                     <? } ?>
                     <? if ($idea['status'] != 0) { ?>
-                        <div id="status_<?=$idea['id']?>" class="nr_votes <?= $func->giveStatus($idea['status'], 'class') ?>"><?= $func->giveStatus($idea['status'], 'text') ?></div>
+                        <div id="status_<?= $idea['id'] ?>" class="nr_votes <?= $func->giveStatus($idea['status'], 'class') ?>"><?= $func->giveStatus($idea['status'], 'text') ?></div>
                     <? } ?>
                 </div>
 
@@ -121,12 +122,12 @@ while ($info = mysql_fetch_array($result_resources)) {
                         <?= $func->shortString($idea['description'], 300, ' ...  <a href="' . $conf->HTTP_SERVER_BASE . 'idea/' . $idea['id'] . '-' . $func->makeTitle($idea['idea']) . '"><b>More</b></a>') ?>
                     </div>
                     <div class="auth_inf">
-                        Sugerat de <?= $func->giveAuthor($idea['auth_id']) ?> | <a href="<?= $conf->HTTP_SERVER_BASE ?>idea/<?= $idea['id'] ?>-<?= $func->makeTitle($idea['idea']) ?>"><b>
-                            <?= $func->giveComments($idea['comments']) ?></b></a>
+                        Sugerat de <?= $func->giveAuthor($idea['auth_id']) ?> pe <?=date('jS \o\f F Y',strtotime($idea['sub_date']))?> | <a href="<?= $conf->HTTP_SERVER_BASE ?>idea/<?= $idea['id'] ?>-<?= $func->makeTitle($idea['idea']) ?>"><b>
+                                <?= $func->giveComments($idea['comments']) ?></b></a>
                     </div>
                     <? if (!empty($idea['admin_comment'])) { ?>
                         <div class="admin_comment">
-                            <div id="com_status_<?=$idea['id']?>" class="ad_<?= $func->giveStatus($idea['status'], 'class') ?>"></div>
+                            <div id="com_status_<?= $idea['id'] ?>" class="ad_<?= $func->giveStatus($idea['status'], 'class') ?>"></div>
                             <div class="ad_comment">
                                 <?= $idea['admin_comment'] ?>
                             </div>

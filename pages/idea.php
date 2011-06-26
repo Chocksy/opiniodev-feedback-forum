@@ -169,7 +169,8 @@ while ($info = mysql_fetch_array($result_resources)) {
         <!--Post comment-->
         <div class="comentit">
             <div class="sayit">Spune ceva:</div>
-            <form action="javascript:void(0)" id="post_comment" onsubmit="postComment(<?= $id ?>)">
+            <form action="javascript:void(0)" id="post_comment" onsubmit="postComment()">
+                <input type="hidden" id="idea_id" name="idea_id" value="<?=$id?>"/>
                 <label for="comment">Comenteaza...</label>
                 <textarea id="comment" name="comment" rows="5" cols="5"></textarea>
                 <input type="submit" class="medium button red" value="Spune-o"/>
