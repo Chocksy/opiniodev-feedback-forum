@@ -22,14 +22,14 @@ include('includes/app_top.php');
     <body>
         <div id="create_new">
             <a class="close" href="javascript:void(0)" onclick="closeNew()">X</a>
-            <div class="title">Novo Contato/Idéia</div>
+            <div class="title">Idee Noua</div>
             <div class="form">
                 <form action="javascript:void(0)" onsubmit="createIdea()">
-                    <div class="f_title">Título</div>
+                    <div class="f_title">Idee</div>
                     <input type="text" id="title"/>
-                    <div class="f_title">Descrição &uArr;<sup>opcional</sup></div>
+                    <div class="f_title">Descriere &uArr;<sup>optional</sup></div>
                     <textarea id="description" rows="5" cols="5"></textarea>
-                    <input type="submit" value="Enviar"/>
+                    <input type="submit" value="Adauga"/>
                 </form>
             </div>
         </div>
@@ -37,12 +37,12 @@ include('includes/app_top.php');
         <div id="content">
             <a href="<?=$conf->HTTP_SERVER_BASE?>"><img src="<?=$conf->DIR_IMG?>logo.jpg" alt="logo"/></a>
             <br clear="all"/>
-            <div class="title fleft"><b>iCapro</b> Feedback</div>
+            <div class="title fleft"><b>Chocksy</b> Feedback</div>
             <div class="get_in">
                 <? if (!$session->check()) { ?>
-                <a href="<?=$conf->LOGIN_URL?>">Entrar</a> ou <a href="<?=$conf->SIGNUP_URL?>">Cadastrar-se</a>
+                <a href="<?=$conf->LOGIN_URL?>">Intra</a> sau <a href="<?=$conf->SIGNUP_URL?>">Inscriete</a>
                     <? }else { ?>
-                <a href="javascript:void(0)" onclick="logout()">Log out</a>
+                <a href="javascript:void(0)" onclick="logout()">Iesire</a>
                     <? } ?>
             </div>
             <br clear="all"/>

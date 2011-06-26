@@ -104,7 +104,7 @@ label{position: absolute; z-index: 1;-webkit-transition: opacity 0.15s linear; c
          -moz-border-radius-bottomleft:5px; -webkit-border-bottom-left-radius:5px;
          -moz-border-radius-bottomright:5px; -webkit-border-bottom-right-radius:5px;}
 .do_vote:hover{background:#bcd1e2; color: #000;}
-.idea{margin-left:70px; color: #595959;}
+.idea{margin-left:70px; color: #595959;min-height: 80px;}
 .idea .title a{color:black;}
 .idea .title a:hover{color: #4c7ca3;}
 .idea .auth_desc{margin-top:7px;}
@@ -120,6 +120,17 @@ label{position: absolute; z-index: 1;-webkit-transition: opacity 0.15s linear; c
 .admin_comment .auth_inf{ padding: 5px 15px;}
 
 .not_found{font-size:24px; text-align:center; margin: 15px 0;}
+
+.admin_actions{margin: 10px 0 0 0; display: block;}
+.admin_actions li{display:block; float: left; border-right: 1px solid #ccc; padding: 0 5px;}
+.admin_actions li:last-child{border-right: none;}
+.admin_actions li a{font-size:12px; font-weight: bold; text-transform: uppercase;}
+.admin_actions a.start{color: #6FBC00;}
+.admin_actions a.reviz{color: #999999;}
+.admin_actions a.plan{color:#F0BA00;}
+.admin_actions a.complet{color: #7D7EDF;}
+.delete_idea{color:red;}
+
 /* New Idea popup
 ----------------------------------------------------------------------------------------------------*/
 #create_new{width:350px; height: auto; background: white; position:absolute; z-index: 100;

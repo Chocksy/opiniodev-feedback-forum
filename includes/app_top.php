@@ -9,4 +9,5 @@ include('session.class.php');
 $db=new Conn;
 $paginate = new Paginator;
 $session=new session;
+$func=new func();
 ?>

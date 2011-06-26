@@ -88,10 +88,10 @@ function search(elem){
     }else if($('#init_results').is(':hidden')){
         $('#results').hide();
         $('#init_results').show();
-        $('#create_button').val('Search').attr("disabled","disabled");
+        $('#create_button').val('Cauta').attr("disabled","disabled");
     }
     function Response(){
-        $('#create_button').val('Create Idea').attr("disabled","");
+        $('#create_button').val('Adauga Idea').attr("disabled","");
     }
 }
 
@@ -222,6 +222,37 @@ function logout(){
     $.get(url,pars,Response);
     function Response(data){
         document.location.reload(true);
+    }
+    return false;
+}
+
+function markIdea(id,status){
+    var url=HTTP_SERVER_BASE+'ajax/mark_idea.php';
+    var pars='&id='+id;
+    pars+='&status='+status;
+    $.get(url,pars,Response);
+    function Response(data){
+        var jsonObject = JSON.parse(data);
+        var sts         = jsonObject.status;
+        var adm_com         = jsonObject.adm_com;
+        if($('#status_'+id).length>0)
+            $('#status_'+id).replaceWith(sts);
+        else
+            $('.votes').append(sts);
+
+        if($('#com_status_'+id).length>0)
+            $('#com_status_'+id).replaceWith(adm_com);
+    }
+    return false;
+}
+
+function deleteIdea(id){
+    var url=HTTP_SERVER_BASE+'ajax/delete_idea.php';
+    var pars='&id='+id;
+    $.get(url,pars,Response);
+    function Response(data){
+        document.location.href=HTTP_SERVER_BASE;
+        
     }
     return false;
 }
