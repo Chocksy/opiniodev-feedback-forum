@@ -173,7 +173,7 @@ while ($info = mysql_fetch_array($result_resources)) {
                 <input type="hidden" id="idea_id" name="idea_id" value="<?=$id?>"/>
                 <label for="comment">Comment...</label>
                 <textarea id="comment" name="comment" rows="5" cols="5"></textarea>
-                <input type="submit" class="medium button red" value="Spune-o"/>
+                <input type="submit" class="medium button red" value="Say it"/>
                 <? if (Session::get_param('admin')) { ?>
                     <label><input type="checkbox" value="1" id="admin_change" name="admin_change"/> Change the administrator comment.</label>
                     <? } ?>
