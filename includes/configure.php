@@ -6,23 +6,12 @@ if ($_SERVER['SERVER_ADDR'] == '127.0.0.1') {
     define('DB_NAME', 'feedbacker');
     define('DB_USERNAME', 'root');
     define('DB_PASSWORD', '');
-
-    define('DB_HOST2', 'localhost');
-    define('DB_NAME2', 'feedbacker');
-    define('DB_USERNAME2', 'root');
-    define('DB_PASSWORD2', '');
 } else {
 // online config
     define('DB_HOST', 'localhost');
     define('DB_NAME', '');
     define('DB_USERNAME', '');
     define('DB_PASSWORD', '');
-  
-
-    define('DB_HOST2', 'localhost');
-    define('DB_NAME2', '');
-    define('DB_USERNAME2', '');
-    define('DB_PASSWORD2', '');
 }
 //comment
 ini_set('session.use_cookies', 1);

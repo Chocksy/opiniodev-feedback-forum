@@ -4,10 +4,7 @@ $term = $func->secure_string($_GET['term']);
 $result_resources = $db->db_query("SELECT *, MATCH(idea, description) AGAINST('$term') AS score FROM feedback_ideas
                                 WHERE MATCH(idea, description) AGAINST('$term') ORDER BY score DESC LIMIT " . $conf->IDEAS_PER_PAGE);
 while ($info = mysql_fetch_array($result_resources)) {
-    $lev = $func->levenshteinDistance($term, $info['idea']);
-    if ($lev >= 5) {
-        $ideas[] = $info;
-    } 
+    $ideas[] = $info;
 }
 $highliter = '<span style="background:yellow;">\1</span>';
 if (!empty($ideas)) {
