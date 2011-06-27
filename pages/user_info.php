@@ -16,7 +16,7 @@ $user = mysql_fetch_assoc($db->db_query("SELECT " . $conf->USERNAME . "," . $con
     <div id="user_info">
         <img src="http://www.gravatar.com/avatar/<?= md5($user['email']) ?>?s=100" class="avatar"/>
         <div class="info">
-            <div class="title nomrg">Ideile Tale</div>
+            <div class="title nomrg">Your Ideas</div>
             <ul class="ideas">
                 <? if (is_array($my_ideas))
                     foreach ($my_ideas as $idea) { ?>
@@ -26,7 +26,7 @@ $user = mysql_fetch_assoc($db->db_query("SELECT " . $conf->USERNAME . "," . $con
             </ul>
         </div>
         <div class="info">
-            <div class="title nomrg">Idei Votate</div>
+            <div class="title nomrg">Voted Ideas</div>
             <ul class="ideas">
                 <? if (is_array($my_votes))
                     foreach ($my_votes as $vote) { ?>

@@ -22,27 +22,27 @@ class func {
     function giveStatus($id, $type) {
         switch ($id) {
             case '1':
-                $status['text'] = 'sub revizuire';
+                $status['text'] = 'under review';
                 $status['class'] = 'review';
                 break;
             case '2':
-                $status['text'] = 'planuita';
+                $status['text'] = 'planned';
                 $status['class'] = 'planned';
                 break;
             case '3':
-                $status['text'] = 'inceputa';
+                $status['text'] = 'started';
                 $status['class'] = 'started';
                 break;
             case '4':
-                $status['text'] = 'completa';
+                $status['text'] = 'completed';
                 $status['class'] = 'completed';
                 break;
             case'5':
-                $status['text'] = 'duplicat';
+                $status['text'] = 'duplicate';
                 $status['class'] = 'duplicate';
                 break;
             case'6':
-                $status['text'] = 'respinsa';
+                $status['text'] = 'declined';
                 $status['class'] = 'declined';
                 break;
             default:
@@ -56,7 +56,7 @@ class func {
     function giveAuthor($id) {
         $config = new config();
         if ($id == '0')
-            return 'Anonim';
+            return 'Anonymous';
         else {
             $author = mysql_fetch_array($this->db->db_query("SELECT username FROM " . $config->USERS_TABLE . " WHERE id='$id'"));
             return $author['username'];
@@ -65,9 +65,9 @@ class func {
 
     function giveComments($nr) {
         if ($nr != 1) {
-            $text = $nr . ' comentarii';
+            $text = $nr . ' comments';
         } else {
-            $text = $nr . ' comentariu';
+            $text = $nr . ' comment';
         }
         return $text;
     }

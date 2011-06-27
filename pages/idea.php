@@ -58,7 +58,7 @@ while ($info = mysql_fetch_array($result_resources)) {
             <?= $idea['description'] ?>
         </div>
         <div class="auth_inf">
-            Sugerat de <?= $func->giveAuthor($idea['auth_id']) ?>
+            Suggested by <?= $func->giveAuthor($idea['auth_id']) ?>
         </div>
         <? if (!empty($idea['admin_comment'])) { ?>
             <div class="admin_comment">
@@ -74,18 +74,18 @@ while ($info = mysql_fetch_array($result_resources)) {
         <? if (Session::get_param('admin')) { ?>
             <ul class="admin_actions">
                 <? if ($idea['status'] != '3') { ?>
-                    <li><a href="javascript:void(0)" class="start" onclick="markIdea('<?= $idea['id'] ?>','3')">Inceputa</a></li>
+                    <li><a href="javascript:void(0)" class="start" onclick="markIdea('<?= $idea['id'] ?>','3')">Started</a></li>
                 <? } ?>
                 <? if ($idea['status'] != '2') { ?>
-                    <li><a href="javascript:void(0)" class="plan" onclick="markIdea('<?= $idea['id'] ?>','2')">Planuita</a></li>
+                    <li><a href="javascript:void(0)" class="plan" onclick="markIdea('<?= $idea['id'] ?>','2')">Planned</a></li>
                 <? } ?>
                 <? if ($idea['status'] != '1') { ?>
-                    <li><a href="javascript:void(0)" class="reviz" onclick="markIdea('<?= $idea['id'] ?>','1')">Sub Revizuire</a></li>
+                    <li><a href="javascript:void(0)" class="reviz" onclick="markIdea('<?= $idea['id'] ?>','1')">Under Review</a></li>
                 <? } ?>
                 <? if ($idea['status'] != '4') { ?>
-                    <li><a href="javascript:void(0)" class="complet" onclick="markIdea('<?= $idea['id'] ?>','4')">Completa</a></li>
+                    <li><a href="javascript:void(0)" class="complet" onclick="markIdea('<?= $idea['id'] ?>','4')">Completed</a></li>
                 <? } ?>       
-                <li><a href="javascript:void(0)" class="delete_idea" onclick="deleteIdea('<?= $idea['id'] ?>')">Sterge</a></li>
+                <li><a href="javascript:void(0)" class="delete_idea" onclick="deleteIdea('<?= $idea['id'] ?>')">Delete</a></li>
             </ul>
         <? } ?>
         <br clear="all"/>
@@ -127,7 +127,7 @@ while ($info = mysql_fetch_array($result_resources)) {
                     </div>
                     <div class="com_date" title="<?= date('Y-m-d\TH:i:s\Z', strtotime($comment['com_data']['date'])); ?>"></div>
                     <? if (Session::get_param('admin')) { ?>
-                        <a href="javascript:void(0)" class="delete_com" onclick="deleteComment('<?= $comment['com_data']['id'] ?>')">Sterge</a>
+                        <a href="javascript:void(0)" class="delete_com" onclick="deleteComment('<?= $comment['com_data']['id'] ?>')">Delete</a>
                     <? } ?>
                 </div>
                 <br clear="all"/>
@@ -137,11 +137,11 @@ while ($info = mysql_fetch_array($result_resources)) {
     <? if ($total_pages > 1) { ?>
         <div class="pagination" style="float: right;">
             <? if ($page > 1) { ?>
-                <a class="paginate" href="<?= $conf->HTTP_SERVER_BASE . $idea_link . '?page=' . $prev_page ?>">&laquo; Anterioara</a> :
+                <a class="paginate" href="<?= $conf->HTTP_SERVER_BASE . $idea_link . '?page=' . $prev_page ?>">&laquo; Previous</a> :
                 <?
             } else {
                 ?>
-                <span class="dots">&laquo; Anterioara</span> :
+                <span class="dots">&laquo; Previous</span> :
                 <?
             }
             if ($page - 5 > 0)
@@ -157,10 +157,10 @@ while ($info = mysql_fetch_array($result_resources)) {
                 echo '<span class="dots">...</span>&nbsp;';
             ?>
             <? if ($page < $total_pages) { ?>
-                : <a class="paginate" href="<?= $conf->HTTP_SERVER_BASE . $idea_link . '?page=' . $next_page ?>">Urmatoarea &raquo;</a>
+                : <a class="paginate" href="<?= $conf->HTTP_SERVER_BASE . $idea_link . '?page=' . $next_page ?>">Next &raquo;</a>
             <? } else {
                 ?>
-                : <span class="dots">Urmatoarea &raquo;</span>
+                : <span class="dots">Next &raquo;</span>
             <? } ?>
         </div>
     <? } ?>
@@ -168,14 +168,14 @@ while ($info = mysql_fetch_array($result_resources)) {
     <? if ($session->check()) { ?>
         <!--Post comment-->
         <div class="comentit">
-            <div class="sayit">Spune ceva:</div>
+            <div class="sayit">Say something:</div>
             <form action="javascript:void(0)" id="post_comment" onsubmit="postComment()">
                 <input type="hidden" id="idea_id" name="idea_id" value="<?=$id?>"/>
-                <label for="comment">Comenteaza...</label>
+                <label for="comment">Comment...</label>
                 <textarea id="comment" name="comment" rows="5" cols="5"></textarea>
                 <input type="submit" class="medium button red" value="Spune-o"/>
                 <? if (Session::get_param('admin')) { ?>
-                    <label><input type="checkbox" value="1" id="admin_change" name="admin_change"/> Schimba commentul dat de catre administrator.</label>
+                    <label><input type="checkbox" value="1" id="admin_change" name="admin_change"/> Change the administrator comment.</label>
                     <? } ?>
             </form>
         </div>

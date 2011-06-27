@@ -66,8 +66,8 @@ while ($info = mysql_fetch_array($result_resources)) {
 <br clear="all"/>
 <div class="search">
     <form action="javascript:void(0)" id="search_form" onsubmit="showNew()" autocomplete="off">
-        <div class="i_t"><b>Ar trebui</b>
-            <label for="y_idea">(sa ne spui ce ai dorii sa implementam)</label>
+        <div class="i_t"><b>You should</b>
+            <label for="y_idea">(tell us what you want us to do)</label>
             <input type="text" id="y_idea" onkeyup="search(this)"/>
         </div>
         <input type="submit" value="Cauta" id="create_button" disabled="disabled"/>
@@ -79,19 +79,19 @@ while ($info = mysql_fetch_array($result_resources)) {
     <div class="categs">
         <ul>
             <li <?= ($tab == 'popular') ? 'class="active"' : '' ?>>
-                <a href="<?= $conf->HTTP_SERVER_BASE ?>pages/1-popular">Populare</a>
+                <a href="<?= $conf->HTTP_SERVER_BASE ?>pages/1-popular">Popular</a>
             </li>
             <li <?= ($tab == 'hot') ? 'class="active"' : '' ?>>
                 <a href="<?= $conf->HTTP_SERVER_BASE ?>pages/1-hot">Hot</a>
             </li>
             <li <?= ($tab == 'new') ? 'class="active"' : '' ?>>
-                <a href="<?= $conf->HTTP_SERVER_BASE ?>pages/1-new">Noi <b class="blue"><?= $new_rez ?></b></a>
+                <a href="<?= $conf->HTTP_SERVER_BASE ?>pages/1-new">New <b class="blue"><?= $new_rez ?></b></a>
             </li>
             <li <?= ($tab == 'accepted') ? 'class="active"' : '' ?>>
-                <a href="<?= $conf->HTTP_SERVER_BASE ?>pages/1-accepted">Acceptate <b class="yellow"><?= $acc_rez ?></b></a>
+                <a href="<?= $conf->HTTP_SERVER_BASE ?>pages/1-accepted">Accepted <b class="yellow"><?= $acc_rez ?></b></a>
             </li>
             <li <?= ($tab == 'completed') ? 'class="active"' : '' ?>>
-                <a href="<?= $conf->HTTP_SERVER_BASE ?>pages/1-completed">Complete <b class="green"><?= $com_rez ?></b></a>
+                <a href="<?= $conf->HTTP_SERVER_BASE ?>pages/1-completed">Completed <b class="green"><?= $com_rez ?></b></a>
             </li>
         </ul>
     </div>
@@ -109,7 +109,7 @@ while ($info = mysql_fetch_array($result_resources)) {
                         votes<br/>
                     </div>
                     <? if ($idea['status'] != 4 && !$func->checkVoted($idea['id'], $voted_ideas)) { ?>
-                        <a href="javascript:void(0)" id="do_vote_<?= $idea['id'] ?>" onclick="vote('<?= $idea['id'] ?>')" class="do_vote">voteaza</a>
+                        <a href="javascript:void(0)" id="do_vote_<?= $idea['id'] ?>" onclick="vote('<?= $idea['id'] ?>')" class="do_vote">vote</a>
                     <? } ?>
                     <? if ($idea['status'] != 0) { ?>
                         <div id="status_<?= $idea['id'] ?>" class="nr_votes <?= $func->giveStatus($idea['status'], 'class') ?>"><?= $func->giveStatus($idea['status'], 'text') ?></div>
@@ -122,7 +122,8 @@ while ($info = mysql_fetch_array($result_resources)) {
                         <?= $func->shortString($idea['description'], 300, ' ...  <a href="' . $conf->HTTP_SERVER_BASE . 'idea/' . $idea['id'] . '-' . $func->makeTitle($idea['idea']) . '"><b>More</b></a>') ?>
                     </div>
                     <div class="auth_inf">
-                        Sugerat de <?= $func->giveAuthor($idea['auth_id']) ?> pe <?=date('jS \o\f F Y',strtotime($idea['sub_date']))?> | <a href="<?= $conf->HTTP_SERVER_BASE ?>idea/<?= $idea['id'] ?>-<?= $func->makeTitle($idea['idea']) ?>"><b>
+                        Suggested by <?= $func->giveAuthor($idea['auth_id']) ?> on <?= date('jS \o\f F Y', strtotime($idea['sub_date'])) ?> | 
+                        <a href="<?= $conf->HTTP_SERVER_BASE ?>idea/<?= $idea['id'] ?>-<?= $func->makeTitle($idea['idea']) ?>"><b>
                                 <?= $func->giveComments($idea['comments']) ?></b></a>
                     </div>
                     <? if (!empty($idea['admin_comment'])) { ?>
@@ -139,21 +140,20 @@ while ($info = mysql_fetch_array($result_resources)) {
                     <? if (Session::get_param('admin')) { ?>
                         <ul class="admin_actions">
                             <? if ($idea['status'] != '3') { ?>
-                                <li><a href="javascript:void(0)" class="start" onclick="markIdea('<?= $idea['id'] ?>','3')">Inceputa</a></li>
+                                <li><a href="javascript:void(0)" class="start" onclick="markIdea('<?= $idea['id'] ?>','3')">Started</a></li>
                             <? } ?>
                             <? if ($idea['status'] != '2') { ?>
-                                <li><a href="javascript:void(0)" class="plan" onclick="markIdea('<?= $idea['id'] ?>','2')">Planuita</a></li>
+                                <li><a href="javascript:void(0)" class="plan" onclick="markIdea('<?= $idea['id'] ?>','2')">Planned</a></li>
                             <? } ?>
                             <? if ($idea['status'] != '1') { ?>
-                                <li><a href="javascript:void(0)" class="reviz" onclick="markIdea('<?= $idea['id'] ?>','1')">Sub Revizuire</a></li>
+                                <li><a href="javascript:void(0)" class="reviz" onclick="markIdea('<?= $idea['id'] ?>','1')">Under Review</a></li>
                             <? } ?>
                             <? if ($idea['status'] != '4') { ?>
-                                <li><a href="javascript:void(0)" class="complet" onclick="markIdea('<?= $idea['id'] ?>','4')">Completa</a></li>
+                                <li><a href="javascript:void(0)" class="complet" onclick="markIdea('<?= $idea['id'] ?>','4')">Completed</a></li>
                             <? } ?>       
-                            <li><a href="javascript:void(0)" class="delete_idea" onclick="deleteIdea('<?= $idea['id'] ?>')">Sterge</a></li>
+                            <li><a href="javascript:void(0)" class="delete_idea" onclick="deleteIdea('<?= $idea['id'] ?>')">Delete</a></li>
                         </ul>
                     <? } ?>
-
                 </div>
             </div>
             <br clear="all"/><br/><br/>
@@ -163,11 +163,11 @@ while ($info = mysql_fetch_array($result_resources)) {
             <div class="before_line"></div>
             <div class="pagination">
                 <? if ($page > 1) { ?>
-                    <a class="paginate" href="<?= $conf->HTTP_SERVER_BASE ?>pages/<?= $prev_page ?>-<?= $tab ?>">&laquo; Anterioara</a> :
+                    <a class="paginate" href="<?= $conf->HTTP_SERVER_BASE ?>pages/<?= $prev_page ?>-<?= $tab ?>">&laquo; Previous</a> :
                     <?
                 } else {
                     ?>
-                    <span class="dots">&laquo; Anterioara</span> :
+                    <span class="dots">&laquo; Previous</span> :
                     <?
                 }
                 if ($page - 5 > 0)
@@ -183,16 +183,16 @@ while ($info = mysql_fetch_array($result_resources)) {
                     echo '<span class="dots">...</span>&nbsp;';
                 ?>
                 <? if ($page < $total_pages) { ?>
-                    : <a class="paginate" href="<?= $conf->HTTP_SERVER_BASE ?>pages/<?= $next_page ?>-<?= $tab ?>">Urmatorea &raquo;</a>
+                    : <a class="paginate" href="<?= $conf->HTTP_SERVER_BASE ?>pages/<?= $next_page ?>-<?= $tab ?>">Next &raquo;</a>
                 <? } else {
                     ?>
-                    : <span class="dots">Urmatorea &raquo;</span>
+                    : <span class="dots">Next &raquo;</span>
                 <? } ?>
             </div>
             <?
         }
     } else {
         ?>
-        <div class="not_found"> Nu exista rezultate!</div>
+        <div class="not_found"> There are no results. Please add the idea!</div>
     <? } ?>
 </div>
