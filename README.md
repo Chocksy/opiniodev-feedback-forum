@@ -8,4 +8,7 @@ What do you need to get your opiniodev running
 
 <a href="http://www.pledgie.com/campaigns/9256"><img src="http://pledgie.com/campaigns/9256.png" border="0"' /></a>
 
-[DEMO](http://ajaxmasters.com/development/feedback-forum/)
+[DEMO](http://ajaxmasters.com/development/feedback-forum/) - admin login is: 
+---------------------------------------
+* username: admin
+* password: admin
