@@ -1,0 +1,1 @@
+<?php//SESSION CONFIG CLASSclass sessionConfig { // Session Settings    Const check_browser 	= true;    Const check_ip_blocks 	= 4;    Const session_salt 	= 'secure';    Const regenerate_id 	= true;    Const session_timeout	= 0;}?>

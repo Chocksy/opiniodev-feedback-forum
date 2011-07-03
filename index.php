@@ -1,86 +1,63 @@
-<?
+<?php
 /**
  * Copyright: ajaxmasters.com
  * Original Authors: ajaxmasters.com
  */
-include('includes/app_top.php');
+
+include ('core/main.class.php');
+$main = new Main();
+$users = new Users();
+
+//get pars except for page
+$pars = parseUrl::get_pars($_GET['pars']);
+//get page name and store it in a variable
+$pagename = parseUrl::get_page(Security::secureString($_GET['pars']));
+
+$filename = $main->modulesUrl($pagename);
+//include the header of every module
+$controller = $main->controllerUrl($pagename);
+if (is_file($controller))
+    include_once ($controller);
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title><?=$conf->SITE_TITLE?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel="stylesheet" href="<?=$conf->DIR_CSS?>style.css"/>
-        <?
-        $views=array('pages','idea','getin');
-        if(isset($_GET['view']) && in_array($_GET['view'],$views))
-            $view=$_GET['view'];
-        else
-            $view='pages';
-        ?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <?php include_once (CORE_DIR . "meta_tags.php"); ?>
+        <link rel="stylesheet" href="<?= HTTP_CORE_BASE ?>css/style.css"/>
+        <link rel="icon" type="image/ico" href="favicon.ico"/>
+        <!--[if IE]>
+            <link rel="stylesheet" type="text/css" href="<?= HTTP_CORE_BASE ?>css/ie.css" />
+        <![endif]-->
+        <!--[if lte IE 6]>
+            <link rel="stylesheet" type="text/css" href="<?= HTTP_CORE_BASE ?>css/ie6.css" />
+        <![endif]-->
+        <!--[if  IE 7]>
+            <link rel="stylesheet" type="text/css" href="<?= HTTP_CORE_BASE ?>css/ie7.css" />
+        <![endif]-->
+
     </head>
     <body>
-        <div id="create_new">
-            <a class="close" href="javascript:void(0)" onclick="closeNew()">X</a>
-            <div class="title">New Idea</div>
-            <div class="form">
-                <form action="javascript:void(0)" onsubmit="createIdea()">
-                    <div class="f_title">Idea</div>
-                    <input type="text" id="title"/>
-                    <div class="f_title">Description &uArr;<sup>optional</sup></div>
-                    <textarea id="description" rows="5" cols="5"></textarea>
-                    <input type="submit" value="Adauga"/>
-                </form>
-            </div>
-        </div>
-        <div id="blackout"></div>
-        <div id="content">
-            <a href="<?=$conf->HTTP_SERVER_BASE?>"><img src="<?=$conf->DIR_IMG?>logo.jpg" alt="logo"/></a>
-            <br clear="all"/>
-            <div class="title fleft"><b>Chocksy</b> Feedback</div>
-            <div class="get_in">
-                <? if (!$session->check()) { ?>
-                <a href="<?=$conf->LOGIN_URL?>">Login</a> sau <a href="<?=$conf->SIGNUP_URL?>">Register</a>
-                    <? }else { ?>
-                <a href="javascript:void(0)" onclick="logout()">Log Out</a>
-                    <? } ?>
-            </div>
-            <br clear="all"/>
-            <div id="container">
-
-                <?
-                //here we put the stuff!
-                include('pages/' . $view.'.php');
-                ?>
-            </div>
-            <div id="footer">
-                &copy;
-                <?=date('Y')?> <a href="http://ajaxmasters.com">ajaxmasters.com</a>
-            </div>
-        </div>
-        <!--scripts place yeeee-->
+        <input type="hidden" id="page_name_js" value="<?= $pagename ?>" />
         <?
-        if ($_SERVER['SERVER_ADDR'] == '127.0.0.1') {
-            ?>
-        <script type="text/javascript">
-            var HTTP_SERVER_BASE='<?=$conf->HTTP_SERVER_BASE?>';
-        </script>
-            <?
-        }else {
-            ?>
-        <script type="text/javascript">
-            var test=document.location.href.indexOf('www.');
-            if (test != -1)
-                var HTTP_SERVER_BASE='<?=$conf->HTTP_SERVER_BASE_JAVA?>';
-            else
-                var HTTP_SERVER_BASE='<?=$conf->HTTP_SERVER_BASE?>';
-        </script>
-            <?
-        }
+        include ('header.php');
         ?>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-        <script type="text/javascript" src="<?=$conf->DIR_JS?>jquery.string.js"></script>
-        <script type="text/javascript" src="<?=$conf->DIR_JS?>script.js"></script>
-        <!--end of scripts place-->
+        <div id="container">
+            <?
+            include_once ($filename);
+            ?>
+        </div>
+        <?
+        include ('footer.php');
+        ?>
+        <script type="text/javascript">var HTTP_SERVER_BASE = '<?= HTTP_CORE_BASE ?>'</script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <script>!window.jQuery && document.write('<script src="<?= HTTP_CORE_BASE ?>core/js/jquery-1.4.2.min.js"><\/script>')</script>
+        <script type="text/javascript" src="<?= JS_DIR ?>plugins.js"></script>
+        <script type="text/javascript" src="<?= JS_DIR ?>code.js"></script>
+        <script type="text/javascript" src="<?= JS_DIR ?>main.js"></script>
+        <script type="text/javascript" src="<?= JS_DIR ?>opiniodev.js"></script>
     </body>
 </html>
+

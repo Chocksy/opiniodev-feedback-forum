@@ -3,9 +3,7 @@ Options +FollowSymlinks
 
 RewriteRule ^.htaccess*$ - [F]
 
-RewriteRule ^pages/([^.]+)-([^.]+)$ index.php?page=$1&tab=$2&view=pages [QSA,L]
-RewriteRule ^idea/([0-9]+)-([^.]+)$ index.php?idea_id=$1&title=$2&view=idea [QSA,L]
-RewriteRule ^([^.]+)$ index.php?view=$1 [QSA,L]
+RewriteRule ^([^.]+)$ index.php?pars=$1 [QSA,L]
 
 FileETag None
 

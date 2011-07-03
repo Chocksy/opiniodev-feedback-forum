@@ -1,11 +1,11 @@
 <?
 
-include('../includes/app_top.php');
-
+include('../core/main.class.php');
+$main = new Main;
 //check for loged in
-$id = $func->secure_string($_GET['id']);
+$id = Security::secureString($_GET['id']);
 
-if ($session->check() && Session::get_param('admin')) {
-    $db->db_query("DELETE FROM feedback_ideas WHERE id='$id'");
+if (session::check() && session::get_param('admin')) {
+    $main->con()->db_query("DELETE FROM feedback_ideas WHERE id='$id'");
 }
 ?>
